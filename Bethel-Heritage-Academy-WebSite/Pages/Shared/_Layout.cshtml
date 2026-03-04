@@ -1,0 +1,332 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Bethel Heritage Academy</title>
+
+
+    <link rel="shortcut icon" type="image/x-icon" href="~/appicon/favicon.ico">
+
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#0f2c59', // Deep Blue from Logo
+                            red: '#d32f2f',  // Torch Red
+                            lightBlue: '#f0f4f8', // Background accent
+                            gold: '#fdbb2d', // For light accents
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'spin-slow': 'spin 12s linear infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Utilities */
+        body {
+            background-color: #f9fafb;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Nav */
+        .glass-nav {
+            background: rgba(15, 44, 89, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Hero Carousel Transitions */
+        .slide {
+            opacity: 0;
+            transition: opacity 1s ease-in-out, transform 1s ease-out;
+            position: absolute;
+            inset: 0;
+            transform: scale(1.05);
+            z-index: 0;
+        }
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 10;
+        }
+        .slide-content {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out 0.3s;
+        }
+        .slide.active .slide-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased font-sans">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav text-white transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <!-- CSS Logo Simulation -->
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center border-4 border-brand-red shadow-lg relative">
+                        <div class="text-brand-blue text-center">
+                            <img src="~/appicon/android-icon-144x144.png" class="rounded-circle" />
+                        </div>
+                    </div>
+                    <div>
+                        <h1 class="font-serif font-bold text-lg leading-tight tracking-wide">BETHEL HERITAGE</h1>
+                        <p class="text-[10px] text-brand-gold uppercase tracking-[0.2em]">Makurdi</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a asp-page="/index" class="hover:text-brand-red transition-colors text-sm font-medium">Home</a>
+                    <a asp-page="/about" class="hover:text-brand-red transition-colors text-sm font-medium">About Us</a>
+                    @* <a asp-page="#daycare" class="hover:text-brand-red transition-colors text-sm font-medium">Daycare</a> *@
+                    <a asp-page="/management" class="hover:text-brand-red transition-colors text-sm font-medium">Management</a>
+                    <a asp-page="/blog" class="hover:text-brand-red transition-colors text-sm font-medium">Blog/News</a>
+                    <a asp-page="/contact-us" class="hover:text-brand-red transition-colors text-sm font-medium">Contact Us</a>
+                    <a href="https://portal.bethelheritageacademy.com.ng" target="_blank" class="bg-brand-red hover:bg-red-700 text-white px-5 py-2.5 rounded-full font-medium transition-all shadow-md">
+                        Result Portal
+                    </a>
+                </div>
+
+                <!-- Mobile Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-blue absolute w-full left-0 top-20 shadow-xl border-t border-white/10">
+            <div class="px-4 py-6 space-y-4">
+                <a asp-page="/index" class="block text-white hover:text-brand-red">Home</a>
+                <a asp-page="/about" class="block text-white hover:text-brand-red">About Us</a>
+                <a asp-page="/blog" class="block text-white hover:text-brand-red">Blog/news</a>
+                <a asp-page="/management" class="block text-white hover:text-brand-red">Management</a>
+                <a asp-page="/contact-us" class="block text-white hover:text-brand-red">Contact Us</a>
+                <a href="https://portal.bethelheritageacademy.com.ng" target="_blank" class="block text-brand-red font-bold">Result Portal</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+            @RenderBody()
+            <footer class="bg-brand-blue text-white pt-16 pb-8 border-t border-white/10">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid md:grid-cols-4 gap-8 mb-12">
+                        <div class="col-span-1 md:col-span-2">
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-brand-blue">
+                                    <i class="fas fa-book-open"></i>
+                                </div>
+                                <span class="font-serif font-bold text-xl tracking-wide">BETHEL HERITAGE</span>
+                            </div>
+                            <p class="text-blue-100 mb-6 max-w-sm">Raising disciplined, knowledgeable, and God-fearing children in a safe, nurturing environment.</p>
+                            <div class="flex gap-4">
+                                <a href="#" class="w-8 h-8 rounded bg-white/10 hover:bg-brand-red flex items-center justify-center transition-colors"><i class="fab fa-facebook-f text-sm"></i></a>
+                                <a href="#" class="w-8 h-8 rounded bg-white/10 hover:bg-brand-red flex items-center justify-center transition-colors"><i class="fab fa-twitter text-sm"></i></a>
+                                <a href="#" class="w-8 h-8 rounded bg-white/10 hover:bg-brand-red flex items-center justify-center transition-colors"><i class="fab fa-instagram text-sm"></i></a>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-4">Quick Links</h4>
+                            <ul class="space-y-2 text-blue-200 text-sm">
+                                <li><a href="#home" class="hover:text-white">Home</a></li>
+                                <li><a href="#about" class="hover:text-white">About Us</a></li>
+                                <li><a href="#admissions" class="hover:text-white">Admissions</a></li>
+                                <li><a href="#management" class="hover:text-white">Management</a></li>
+                                <li><a href="#contact" class="hover:text-white">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-4">Information</h4>
+                            <ul class="space-y-2 text-blue-200 text-sm">
+                                <li><a href="#" class="hover:text-white">School Calendar</a></li>
+                                <li><a href="#" class="hover:text-white">Parent Portal</a></li>
+                                <li><a href="#" class="hover:text-white">Careers</a></li>
+                                <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-blue-200">
+                        <p>&copy; @DateTime.UtcNow.Year Bethel Heritage Academy. All Rights Reserved.</p>
+                        <p class="mt-2 md:mt-0">Powered by: The Return Tech - 08039410863</p>
+                    </div>
+                </div>
+            </footer>
+    </main>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- JavaScript for Interactions and Animations -->
+        <script>
+            // --- Navbar Scroll Effect ---
+            window.addEventListener('scroll', () => {
+                const nav = document.getElementById('navbar');
+                if (window.scrollY > 50) {
+                    nav.classList.add('shadow-lg');
+                } else {
+                    nav.classList.remove('shadow-lg');
+                }
+            });
+
+            // --- Mobile Menu Toggle ---
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // --- Carousel Logic ---
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dot');
+            const totalSlides = slides.length;
+            let slideInterval;
+
+            function showSlide(index) {
+                slides.forEach((slide) => {
+                    slide.classList.remove('active');
+                });
+                dots.forEach((dot) => {
+                    dot.classList.remove('bg-white', 'w-8');
+                    dot.classList.add('bg-white/50', 'w-3');
+                });
+
+                // Handle wrapping
+                if (index >= totalSlides) currentSlide = 0;
+                else if (index < 0) currentSlide = totalSlides - 1;
+                else currentSlide = index;
+
+                slides[currentSlide].classList.add('active');
+
+                // Update Dot
+                dots[currentSlide].classList.remove('bg-white/50', 'w-3');
+                dots[currentSlide].classList.add('bg-white', 'w-8');
+            }
+
+            function nextSlide() {
+                showSlide(currentSlide + 1);
+            }
+
+            function prevSlide() {
+                showSlide(currentSlide - 1);
+            }
+
+            function setSlide(index) {
+                resetInterval();
+                showSlide(index);
+            }
+
+            function startInterval() {
+                slideInterval = setInterval(nextSlide, 6000); // Change every 6 seconds
+            }
+
+            function resetInterval() {
+                clearInterval(slideInterval);
+                startInterval();
+            }
+
+            // Init Carousel
+            showSlide(0);
+            startInterval();
+
+            // --- Scroll Reveal Animation ---
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Only animate once
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
+                observer.observe(el);
+            });
+
+            // --- Placeholder Interaction ---
+            // Simple alert to show interactivity since we don't have a backend
+            const buttons = document.querySelectorAll('button, a[href="#"]');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    // If it's a hash link or a submit button, prevent default purely for demo purposes if needed,
+                    // but we want smooth scroll to work for anchor links.
+                    if(btn.getAttribute('href') === '#') {
+                        // e.preventDefault(); // Optional: Prevent jump if strictly needed for demo
+                    }
+                });
+            });
+        </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

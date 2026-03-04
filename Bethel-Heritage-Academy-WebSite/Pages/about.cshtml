@@ -1,0 +1,83 @@
+﻿@page
+@model Bethel_Heritage_Academy_WebSite.Pages.aboutModel
+@{
+    ViewData["Title"] = "About Us";
+}
+<section class="relative pt-40 pb-20 bg-brand-blue overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <h1 class="font-serif text-5xl font-bold text-white mb-4">Our Story & Vision</h1>
+        <p class="text-blue-200 text-lg max-w-2xl mx-auto">Building character and excellence through faith.</p>
+    </div>
+    <!-- Bottom Wave -->
+    <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none"><svg class="relative block w-[calc(100%+1.3px)] h-[50px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="fill-slate-50"></path></svg></div>
+</section>
+
+<!-- Main Content -->
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+
+    <div class="grid md:grid-cols-2 gap-16 items-start mb-24">
+        <div>
+            <span class="text-brand-red font-bold uppercase tracking-widest text-sm">Since 2022</span>
+            <h2 class="font-serif text-3xl font-bold text-brand-blue mt-2 mb-6">About Bethel Heritage Academy</h2>
+            <p class="text-slate-600 mb-4 leading-relaxed">Bethel Heritage Academy began as a Daycare center, born out of a vision conceived in prayer and guided by faith. The desire was simple yet powerful: to create a safe, nurturing environment where young children could receive quality early childhood education grounded in Christian principles.</p>
+            <p class="text-slate-600 mb-4 leading-relaxed">From humble beginnings, the school has grown into a structured academic institution dedicated to raising disciplined, knowledgeable, and God-fearing children. Though our journey started modestly, our vision is expansive — to grow into a leading educational institution with branches across Nigeria and beyond.</p>
+            <p class="text-slate-600 leading-relaxed">We continue to build on strong foundations of faith, excellence, and commitment to child development.</p>
+        </div>
+        <div class="relative">
+            <img src="https://picsum.photos/seed/bethelclass/600/500" alt="Classroom" class="rounded-xl shadow-2xl w-full object-cover">
+            <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-lg shadow-xl hidden md:block">
+                <i class="fas fa-quote-left text-4xl text-brand-blue/20 mb-2"></i>
+                <p class="text-brand-blue font-serif italic text-lg">"Faith, Excellence, and Commitment"</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 mb-24">
+        <!-- Mission -->
+        <div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-brand-blue">
+            <i class="fas fa-bullseye text-3xl text-brand-red mb-4"></i>
+            <h3 class="font-serif text-2xl font-bold text-brand-blue mb-4">Our Mission</h3>
+            <ul class="space-y-3 text-slate-600">
+                <li class="flex items-start gap-3"><i class="fas fa-check text-green-500 mt-1"></i> Pursue academic excellence in all areas of learning.</li>
+                <li class="flex items-start gap-3"><i class="fas fa-check text-green-500 mt-1"></i> Provide a Christ-centered education rooted in moral discipline.</li>
+                <li class="flex items-start gap-3"><i class="fas fa-check text-green-500 mt-1"></i> Prepare learners academically, socially, and spiritually.</li>
+                <li class="flex items-start gap-3"><i class="fas fa-check text-green-500 mt-1"></i> Develop confidence, creativity, and critical thinking.</li>
+            </ul>
+        </div>
+
+        <!-- Vision -->
+        <div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-brand-red">
+            <i class="fas fa-eye text-3xl text-brand-blue mb-4"></i>
+            <h3 class="font-serif text-2xl font-bold text-brand-blue mb-4">Our Vision</h3>
+            <ul class="space-y-3 text-slate-600">
+                <li class="flex items-start gap-3"><i class="fas fa-star text-brand-gold mt-1"></i> To raise godly children who grow into responsible leaders.</li>
+                <li class="flex items-start gap-3"><i class="fas fa-star text-brand-gold mt-1"></i> To develop knowledge, confidence, and practical life skills.</li>
+                <li class="flex items-start gap-3"><i class="fas fa-star text-brand-gold mt-1"></i> To shape individuals who will positively influence society.</li>
+                <li class="flex items-start gap-3"><i class="fas fa-star text-brand-gold mt-1"></i> To become a recognized center of excellence.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Environment -->
+    <div class="text-center mb-12">
+        <h3 class="font-serif text-3xl font-bold text-brand-blue">Our Learning Environment</h3>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+        <div class="text-center p-6 bg-white rounded-lg shadow-sm">
+            <div class="w-16 h-16 bg-brand-lightBlue rounded-full flex items-center justify-center mx-auto mb-4 text-brand-blue text-2xl"><i class="fas fa-book"></i></div>
+            <h4 class="font-bold text-lg mb-2">Academic Facilities</h4>
+            <p class="text-slate-600 text-sm">Conducive classrooms, age-appropriate materials, and computer-based learning exposure.</p>
+        </div>
+        <div class="text-center p-6 bg-white rounded-lg shadow-sm">
+            <div class="w-16 h-16 bg-brand-lightBlue rounded-full flex items-center justify-center mx-auto mb-4 text-brand-blue text-2xl"><i class="fas fa-shield-alt"></i></div>
+            <h4 class="font-bold text-lg mb-2">Safety & Welfare</h4>
+            <p class="text-slate-600 text-sm">Secure premises, supervised playgrounds, and clean child-friendly facilities.</p>
+        </div>
+        <div class="text-center p-6 bg-white rounded-lg shadow-sm">
+            <div class="w-16 h-16 bg-brand-lightBlue rounded-full flex items-center justify-center mx-auto mb-4 text-brand-blue text-2xl"><i class="fas fa-praying-hands"></i></div>
+            <h4 class="font-bold text-lg mb-2">Faith & Character</h4>
+            <p class="text-slate-600 text-sm">Christian-based moral instruction, character-building programs, and spiritual growth.</p>
+        </div>
+    </div>
+
+</main>

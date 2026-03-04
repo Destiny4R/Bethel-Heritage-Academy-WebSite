@@ -1,0 +1,423 @@
+﻿@page
+@inject IConfiguration _configuration
+@model Bethel_Heritage_Academy_WebSite.Pages.indexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<section id="home" class="relative h-screen min-h-[600px] w-full overflow-hidden bg-black">
+
+    <!-- Slide 1 -->
+    <div class="slide active">
+        <img src="https://picsum.photos/seed/bethel1/1920/1080" class="w-full h-full object-cover opacity-50" alt="School Building">
+        <div class="absolute inset-0 bg-gradient-to-r from-brand-blue/90 to-brand-blue/40"></div>
+        <div class="absolute inset-0 flex items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="slide-content max-w-3xl text-white pt-16">
+                <span class="inline-block py-1 px-3 border border-brand-red text-brand-red rounded-full text-sm font-bold mb-4 uppercase tracking-wider">Welcome</span>
+                <h1 class="font-serif text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                    Light Through <br /> <span class="text-brand-red">Knowledge</span>
+                </h1>
+                <p class="text-xl text-gray-200 mb-8 max-w-2xl leading-relaxed">
+                    Raising confident, intelligent, and morally grounded future leaders in a safe and structured learning environment.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#contact" class="bg-brand-red hover:bg-red-700 text-white px-8 py-3.5 rounded-lg font-semibold transition-transform transform hover:scale-105 shadow-lg flex items-center gap-2">
+                        Enroll Today <i class="fas fa-arrow-right text-sm"></i>
+                    </a>
+                    <a href="#about" class="bg-transparent border-2 border-white hover:bg-white hover:text-brand-blue text-white px-8 py-3.5 rounded-lg font-semibold transition-colors">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide">
+        <img src="https://picsum.photos/seed/bethelkids/1920/1080" class="w-full h-full object-cover opacity-50" alt="Happy Kids">
+        <div class="absolute inset-0 bg-gradient-to-r from-brand-blue/90 to-brand-blue/40"></div>
+        <div class="absolute inset-0 flex items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="slide-content max-w-3xl text-white pt-16">
+                <span class="inline-block py-1 px-3 border border-brand-red text-brand-red rounded-full text-sm font-bold mb-4 uppercase tracking-wider">Why Choose Us</span>
+                <h1 class="font-serif text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                    A Community of <br /> <span class="text-brand-red">Excellence</span>
+                </h1>
+                <p class="text-xl text-gray-200 mb-8 max-w-2xl leading-relaxed">
+                    We are more than a school — dedicated to excellence with caring educators and a faith-based environment.
+                </p>
+                <button class="bg-white text-brand-blue px-8 py-3.5 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                    Meet Our Teachers
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide">
+        <img src="https://picsum.photos/seed/bethelplay/1920/1080" class="w-full h-full object-cover opacity-50" alt="Playground">
+        <div class="absolute inset-0 bg-gradient-to-r from-brand-blue/90 to-brand-blue/40"></div>
+        <div class="absolute inset-0 flex items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="slide-content max-w-3xl text-white pt-16">
+                <span class="inline-block py-1 px-3 border border-brand-red text-brand-red rounded-full text-sm font-bold mb-4 uppercase tracking-wider">Admissions Open</span>
+                <h1 class="font-serif text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                    Secure Your <br /> <span class="text-brand-red">Child's Future</span>
+                </h1>
+                <p class="text-xl text-gray-200 mb-8 max-w-2xl leading-relaxed">
+                    Admissions are currently ongoing, especially into our Daycare and Early Learning sections.
+                </p>
+                <a href="#contact" class="bg-brand-red hover:bg-red-700 text-white px-8 py-3.5 rounded-lg font-semibold transition-transform transform hover:scale-105 shadow-lg">
+                    Apply Now
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Carousel Controls -->
+    <button onclick="prevSlide()" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/40 text-white backdrop-blur-sm transition-all z-20">
+        <i class="fas fa-chevron-left"></i>
+    </button>
+    <button onclick="nextSlide()" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/40 text-white backdrop-blur-sm transition-all z-20">
+        <i class="fas fa-chevron-right"></i>
+    </button>
+
+    <!-- Indicators -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+        <button onclick="setSlide(0)" class="dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all"></button>
+        <button onclick="setSlide(1)" class="dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all"></button>
+        <button onclick="setSlide(2)" class="dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all"></button>
+    </div>
+</section>
+
+<!-- ABOUT US SECTION -->
+<section id="about" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div class="relative reveal-on-scroll">
+                <div class="absolute -top-4 -left-4 w-24 h-24 bg-brand-red/10 rounded-full z-0"></div>
+                <img src="https://picsum.photos/seed/bethelclass/600/500" alt="Students Learning" class="rounded-xl shadow-2xl relative z-10 w-full object-cover">
+                <div class="absolute -bottom-6 -right-6 bg-brand-blue text-white p-6 rounded-xl shadow-lg z-20 hidden md:block animate-float">
+                    <p class="text-3xl font-bold font-serif">Since 2022</p>
+                    <p class="text-sm opacity-80">Excellence in Education</p>
+                </div>
+            </div>
+            <div class="reveal-on-scroll">
+                <span class="text-brand-red font-bold uppercase tracking-wider text-sm">Our Story</span>
+                <h2 class="font-serif text-4xl font-bold text-brand-blue mt-2 mb-6">Welcome to Bethel Heritage Academy</h2>
+                <p class="text-slate-600 leading-relaxed mb-6">
+                    At Bethel Heritage Academy, we believe that every child carries a unique light that must be nurtured through knowledge, discipline, and strong Christian values. Since our establishment in 2022, we have remained committed to providing quality education that shapes both the mind and character of every learner.
+                </p>
+                <p class="text-slate-600 leading-relaxed mb-8">
+                    From humble beginnings as a Daycare center, we have grown into a structured academic institution. Our vision is expansive — to grow into a leading educational institution with branches across Nigeria and beyond.
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-brand-blue/10 rounded-lg flex items-center justify-center text-brand-blue flex-shrink-0">
+                            <i class="fas fa-church"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800">Christ-Centered</h4>
+                            <p class="text-sm text-slate-500">Faith-based learning.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-brand-blue/10 rounded-lg flex items-center justify-center text-brand-blue flex-shrink-0">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800">Academic Excellence</h4>
+                            <p class="text-sm text-slate-500">Top-tier curriculum.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MISSION & VISION -->
+<section class="py-20 bg-brand-lightBlue">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Mission -->
+            <div class="bg-white p-10 rounded-2xl shadow-lg hover:shadow-xl transition-shadow reveal-on-scroll border-t-4 border-brand-red">
+                <i class="fas fa-bullseye text-4xl text-brand-red mb-6"></i>
+                <h3 class="font-serif text-2xl font-bold text-brand-blue mb-4">Our Mission</h3>
+                <ul class="space-y-3 text-slate-600">
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Pursue academic excellence in all areas of learning.</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Provide a Christ-centered education rooted in moral discipline and integrity.</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Prepare learners academically, socially, and spiritually for future opportunities.</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i> Develop confidence, creativity, and critical thinking skills.</li>
+                </ul>
+            </div>
+
+            <!-- Vision -->
+            <div class="bg-white p-10 rounded-2xl shadow-lg hover:shadow-xl transition-shadow reveal-on-scroll border-t-4 border-brand-blue">
+                <i class="fas fa-eye text-4xl text-brand-blue mb-6"></i>
+                <h3 class="font-serif text-2xl font-bold text-brand-blue mb-4">Our Vision</h3>
+                <ul class="space-y-3 text-slate-600">
+                    <li class="flex items-start gap-2"><i class="fas fa-star text-brand-gold mt-1"></i> To raise godly children who grow into responsible and impactful leaders.</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-star text-brand-gold mt-1"></i> To develop knowledge, confidence, and practical life skills.</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-star text-brand-gold mt-1"></i> To shape individuals who will positively influence society.</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-star text-brand-gold mt-1"></i> To become a recognized center of excellence.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DAYCARE SECTION -->
+<section id="daycare" class="py-20 bg-white relative overflow-hidden">
+    <!-- Background Decor -->
+    <div class="absolute top-0 right-0 w-1/3 h-full bg-brand-lightBlue/50 -z-10 skew-x-12 transform translate-x-20"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal-on-scroll">
+            <h2 class="font-serif text-4xl font-bold text-brand-blue">Daycare Section</h2>
+            <div class="w-20 h-1 bg-brand-red mx-auto mt-4 rounded-full"></div>
+            <p class="mt-4 text-slate-600 max-w-2xl mx-auto">A Strong Foundation for Lifelong Learning</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Card 1 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden group hover:shadow-xl transition-all duration-300 border border-slate-100 reveal-on-scroll">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://picsum.photos/seed/toddler1/600/400" alt="Daycare" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-brand-blue mb-2">Play-Based Learning</h3>
+                    <p class="text-slate-600 text-sm">We combine love, patience, and guided instruction to ensure every child develops confidence and curiosity.</p>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden group hover:shadow-xl transition-all duration-300 border border-slate-100 reveal-on-scroll">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://picsum.photos/seed/toddler2/600/400" alt="Daycare" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-brand-blue mb-2">Safe Environment</h3>
+                    <p class="text-slate-600 text-sm">Secure and monitored school premises with supervised playground facilities and caring, attentive staff.</p>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden group hover:shadow-xl transition-all duration-300 border border-slate-100 reveal-on-scroll">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://picsum.photos/seed/toddler3/600/400" alt="Daycare" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-brand-blue mb-2">Early Literacy</h3>
+                    <p class="text-slate-600 text-sm">Structured daily routines focusing on foundational literacy, numeracy, and early communication skills.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MANAGEMENT / PROPREITRESS -->
+<section id="management" class="py-20 bg-brand-blue text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row items-center gap-12">
+            <div class="w-full md:w-1/3 reveal-on-scroll">
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-brand-red rounded-lg transform translate-x-4 translate-y-4"></div>
+                    <img src="~/images/proprietress1.png" alt="Mrs. Juliet Iorsue" class="relative rounded-lg w-full object-cover shadow-2xl grayscale group-hover:grayscale-0 transition-all duration-500">
+                </div>
+            </div>
+            <div class="w-full md:w-2/3 reveal-on-scroll">
+                <span class="text-brand-red font-bold uppercase tracking-widest text-sm">Leadership</span>
+                <h2 class="font-serif text-4xl font-bold mt-2 mb-6">Meet the Proprietress</h2>
+                <h3 class="text-2xl font-medium text-gray-200 mb-6">Mrs. Juliet Iorsue</h3>
+                <p class="text-gray-300 leading-relaxed mb-6">
+                    Mrs. Juliet Iorsue is the visionary leader behind Bethel Heritage Academy. A graduate of Benue State University (now Rev. Father Moses Adasu University), she studied Theatre Arts and has received additional professional training in Children’s Programs through VOS (UK) and Accelerated Christian Education (ACE), Jos, Plateau State.
+                </p>
+                <p class="text-gray-300 leading-relaxed mb-8">
+                    Driven by faith and a passion for child development, she founded Bethel Heritage Academy to provide structured, Christ-centered education that empowers children for lifelong success.
+                </p>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-graduation-cap text-brand-red text-xl"></i>
+                        <span>Theatre Arts Graduate</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-certificate text-brand-red text-xl"></i>
+                        <span>VOS (UK) Certified</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FACILITIES / WHY CHOOSE US -->
+<section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal-on-scroll">
+            <h2 class="font-serif text-4xl font-bold text-brand-blue">Why Choose Us?</h2>
+            <p class="text-slate-600 mt-2">Holistic child development in a conducive environment.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Feature 1 -->
+            <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-all border-b-4 border-brand-blue reveal-on-scroll">
+                <i class="fas fa-laptop text-4xl text-brand-blue mb-4"></i>
+                <h4 class="font-bold text-lg mb-2">Computer Exposure</h4>
+                <p class="text-sm text-slate-500">Early computer-based learning exposure to prepare pupils for the digital world.</p>
+            </div>
+            <!-- Feature 2 -->
+            <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-all border-b-4 border-brand-blue reveal-on-scroll">
+                <i class="fas fa-shield-alt text-4xl text-brand-blue mb-4"></i>
+                <h4 class="font-bold text-lg mb-2">Safe & Secure</h4>
+                <p class="text-sm text-slate-500">Secure and monitored school premises with supervised playground facilities.</p>
+            </div>
+            <!-- Feature 3 -->
+            <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-all border-b-4 border-brand-blue reveal-on-scroll">
+                <i class="fas fa-bible text-4xl text-brand-blue mb-4"></i>
+                <h4 class="font-bold text-lg mb-2">Christian Values</h4>
+                <p class="text-sm text-slate-500">Character-building programs and moral instruction rooted in love and guidance.</p>
+            </div>
+            <!-- Feature 4 -->
+            <div class="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-all border-b-4 border-brand-blue reveal-on-scroll">
+                <i class="fas fa-chalkboard-teacher text-4xl text-brand-blue mb-4"></i>
+                <h4 class="font-bold text-lg mb-2">Structured Curriculum</h4>
+                <p class="text-sm text-slate-500">Age-appropriate learning materials and structured curriculum delivery.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- NEWS & BLOG -->
+<section id="news" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-end mb-12 reveal-on-scroll">
+            <div>
+                <h2 class="font-serif text-4xl font-bold text-brand-blue">School News & Updates</h2>
+                <p class="text-slate-600 mt-2">Stay connected with our community.</p>
+            </div>
+            <a asp-page="blog" class="hidden md:inline-block text-brand-red font-bold hover:underline">View All News <i class="fas fa-arrow-right ml-1"></i></a>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            @foreach (var item in Model.newsTable)
+            {
+                <div class="group cursor-pointer reveal-on-scroll">
+                    <div class="overflow-hidden rounded-xl mb-4 relative">
+                        <span class="absolute top-4 left-4 bg-brand-red text-white text-xs font-bold px-3 py-1 rounded-full">@(item.Category)</span>
+                        <img src="@(item.ImagePath)" alt="News" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="text-xs text-slate-400 mb-2">@(item.CreatedDate.ToLongDateString())</div>
+                    <h3 class="font-bold text-xl text-brand-blue group-hover:text-brand-red transition-colors">@(item.Headline)</h3>
+                    <p class="">
+                        @ST.TruncateHtml(item.NewBody, 150)
+                    </p>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section id="contact" class="py-20 bg-brand-lightBlue">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-12 bg-white rounded-2xl shadow-xl overflow-hidden">
+            <!-- Contact Info -->
+            <div class="bg-brand-blue p-10 text-white flex flex-col justify-between">
+                <div>
+                    <h2 class="font-serif text-3xl font-bold mb-6">Get in Touch</h2>
+                    <p class="mb-8 text-blue-100">We would love to show you around our campus. Contact us for admissions inquiries.</p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-map-marker-alt text-brand-red"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Address</h4>
+                                <p class="text-sm text-blue-100">No. 18, Off Iorhum Road, Behind Ultra Modern International Market, Pevigo Close, Makurdi.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-phone text-brand-red"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Phone</h4>
+                                <p class="text-sm text-blue-100">0811 715 7565 <br> 0803 528 4668</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-envelope text-brand-red"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Email</h4>
+                                <p class="text-sm text-blue-100">bethelheritateedu@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-10">
+                    <h4 class="font-bold mb-4">Office Hours</h4>
+                    <p class="text-sm text-blue-100">Monday – Friday</p>
+                    <p class="text-2xl font-serif font-bold">8:00 AM – 4:00 PM</p>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="p-10">
+                <h3 class="font-serif text-2xl font-bold text-brand-blue mb-6">Send us a Message</h3>
+                
+                @if (!string.IsNullOrEmpty(Model.StatusMessage))
+                {
+                    var isSuccess = Model.StatusMessage.StartsWith("Success");
+                    <div class="mb-4 p-4 rounded-lg @(isSuccess ? "bg-green-100 text-green-700 border border-green-300" : "bg-red-100 text-red-700 border border-red-300")">
+                        @Model.StatusMessage.Replace("Success: ", "").Replace("Error: ", "")
+                    </div>
+                }
+
+                <form id="indexContactForm" asp-page-handler="Post" method="post" class="space-y-4">
+                    <div>
+                        <label asp-for="FeedBack.Name" class="block text-sm font-medium text-slate-700 mb-1"></label>
+                        <input asp-for="FeedBack.Name" type="text" class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20 outline-none transition-all" placeholder="John Doe">
+                        <span asp-validation-for="FeedBack.Name" class="text-red-500 text-sm"></span>
+                    </div>
+                    <div>
+                        <label asp-for="FeedBack.Email" class="block text-sm font-medium text-slate-700 mb-1"></label>
+                        <input asp-for="FeedBack.Email" type="email" class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20 outline-none transition-all" placeholder="email@example.com">
+                        <span asp-validation-for="FeedBack.Email" class="text-red-500 text-sm"></span>
+                    </div>
+                    <div>
+                        <label asp-for="FeedBack.Subject" class="block text-sm font-medium text-slate-700 mb-1"></label>
+                        <input asp-for="FeedBack.Subject" type="text" class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20 outline-none transition-all" placeholder="Admissions Inquiry">
+                        <span asp-validation-for="FeedBack.Subject" class="text-red-500 text-sm"></span>
+                    </div>
+                    <div>
+                        <label asp-for="FeedBack.Message" class="block text-sm font-medium text-slate-700 mb-1"></label>
+                        <textarea asp-for="FeedBack.Message" rows="4" class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20 outline-none transition-all" placeholder="How can we help you?"></textarea>
+                        <span asp-validation-for="FeedBack.Message" class="text-red-500 text-sm"></span>
+                    </div>
+
+                    <!-- Google reCAPTCHA -->
+                    <div>
+                        <div id="indexRecaptchaContainer" class="flex justify-center md:justify-start">
+                            <div class="g-recaptcha" data-sitekey="@(_configuration["ReCaptcha:SiteKey"])"></div>
+                        </div>
+                        <span class="text-red-500 text-sm hidden" id="indexRecaptchaError">Please complete the reCAPTCHA verification</span>
+                    </div>
+
+                    <button type="submit" class="w-full bg-brand-red hover:bg-red-700 text-white font-bold py-3.5 rounded-lg transition-colors shadow-lg shadow-red-500/30">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <!-- Google reCAPTCHA v2 Script -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <partial name="_ValidationScriptsPartial" />
+}
+
