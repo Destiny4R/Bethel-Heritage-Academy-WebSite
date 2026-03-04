@@ -89,6 +89,13 @@
             transform: translateY(0);
         }
 
+        /* Hero Carousel Text Shadow for Better Readability */
+        .slide-content h1,
+        .slide-content p,
+        .slide-content span {
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
         /* Scroll Reveal Animation */
         .reveal-on-scroll {
             opacity: 0;
@@ -113,6 +120,20 @@
         }
         ::-webkit-scrollbar-thumb:hover {
             background: #94a3b8;
+        }
+
+        /* Active Navigation Link */
+        nav a.active-nav {
+            color: #d32f2f !important; /* brand-red */
+            border-bottom: 2px solid #d32f2f;
+            padding-bottom: 2px;
+        }
+
+        /* Mobile Active Navigation Link */
+        #mobile-menu a.active-nav {
+            color: #d32f2f !important; /* brand-red */
+            font-weight: bold;
+            border-bottom: none;
         }
     </style>
 </head>
@@ -192,19 +213,18 @@
                         <div>
                             <h4 class="font-bold text-lg mb-4">Quick Links</h4>
                             <ul class="space-y-2 text-blue-200 text-sm">
-                                <li><a href="#home" class="hover:text-white">Home</a></li>
-                                <li><a href="#about" class="hover:text-white">About Us</a></li>
+                                <li><a asp-page="home" class="hover:text-white">Home</a></li>
+                                <li><a asp-page="about" class="hover:text-white">About Us</a></li>
                                 <li><a href="#admissions" class="hover:text-white">Admissions</a></li>
-                                <li><a href="#management" class="hover:text-white">Management</a></li>
-                                <li><a href="#contact" class="hover:text-white">Contact</a></li>
+                                <li><a asp-page="management" class="hover:text-white">Management</a></li>
+                                <li><a asp-page="contact-us" class="hover:text-white">Contact</a></li>
                             </ul>
                         </div>
                         <div>
                             <h4 class="font-bold text-lg mb-4">Information</h4>
                             <ul class="space-y-2 text-blue-200 text-sm">
                                 <li><a href="#" class="hover:text-white">School Calendar</a></li>
-                                <li><a href="#" class="hover:text-white">Parent Portal</a></li>
-                                <li><a href="#" class="hover:text-white">Careers</a></li>
+                                <li><a href="https://portal.bethelheritageacademy.com.ng" class="hover:text-white">Student Portal</a></li>
                                 <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
                             </ul>
                         </div>
@@ -222,6 +242,60 @@
 
         <!-- JavaScript for Interactions and Animations -->
         <script>
+            // --- Active Navigation Tab ---
+            $(document).ready(function () {
+                // Get the current page URL
+                var currentUrl = window.location.pathname.toLowerCase();
+                
+                // Remove trailing slash if exists
+                if (currentUrl.endsWith('/')) {
+                    currentUrl = currentUrl.slice(0, -1);
+                }
+                
+                // Handle root path
+                if (currentUrl === '' || currentUrl === '/') {
+                    currentUrl = '/index';
+                }
+                
+                // Desktop Navigation - Find and activate matching link
+                $('.hidden.md\\:flex a[asp-page]').each(function () {
+                    var linkPage = $(this).attr('asp-page');
+                    if (linkPage) {
+                        var linkPath = linkPage.toLowerCase();
+                        
+                        // Check if current URL matches the link
+                        if (currentUrl === linkPath || currentUrl.endsWith(linkPath)) {
+                            // Remove active class from all nav links
+                            $('.hidden.md\\:flex a').removeClass('text-brand-red border-b-2 border-brand-red');
+                            
+                            // Add active class to current link
+                            $(this).addClass('text-brand-red border-b-2 border-brand-red');
+                            
+                            return false; // Break the loop
+                        }
+                    }
+                });
+                
+                // Mobile Navigation - Find and activate matching link
+                $('#mobile-menu a[asp-page]').each(function () {
+                    var linkPage = $(this).attr('asp-page');
+                    if (linkPage) {
+                        var linkPath = linkPage.toLowerCase();
+                        
+                        // Check if current URL matches the link
+                        if (currentUrl === linkPath || currentUrl.endsWith(linkPath)) {
+                            // Remove active class from all mobile nav links
+                            $('#mobile-menu a').removeClass('text-brand-red font-bold');
+                            
+                            // Add active class to current link
+                            $(this).addClass('text-brand-red font-bold');
+                            
+                            return false; // Break the loop
+                        }
+                    }
+                });
+            });
+
             // --- Navbar Scroll Effect ---
             window.addEventListener('scroll', () => {
                 const nav = document.getElementById('navbar');
