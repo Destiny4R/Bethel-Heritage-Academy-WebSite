@@ -13,25 +13,30 @@ namespace Bethel_Heritage_Academy_WebSite.Services
 
             var timeSpan = now - input;
 
+            bool future = timeSpan.TotalSeconds < 0;
+            timeSpan = future ? timeSpan.Duration() : timeSpan;
+
+            string suffix = future ? "from now" : "ago";
+
             if (timeSpan.TotalSeconds < 60)
-                return $"{(int)timeSpan.TotalSeconds} second(s)";
+                return $"{(int)timeSpan.TotalSeconds} second(s) {suffix}";
 
             if (timeSpan.TotalMinutes < 60)
-                return $"{(int)timeSpan.TotalMinutes} minute(s)";
+                return $"{(int)timeSpan.TotalMinutes} minute(s) {suffix}";
 
             if (timeSpan.TotalHours < 24)
-                return $"{(int)timeSpan.TotalHours} hour(s)";
+                return $"{(int)timeSpan.TotalHours} hour(s) {suffix}";
 
             if (timeSpan.TotalDays < 7)
-                return $"{(int)timeSpan.TotalDays} day(s)";
+                return $"{(int)timeSpan.TotalDays} day(s) {suffix}";
 
             if (timeSpan.TotalDays < 30)
-                return $"{(int)(timeSpan.TotalDays / 7)} week(s)";
+                return $"{(int)(timeSpan.TotalDays / 7)} week(s) {suffix}";
 
             if (timeSpan.TotalDays < 365)
-                return $"{(int)(timeSpan.TotalDays / 30)} month(s)";
+                return $"{(int)(timeSpan.TotalDays / 30)} month(s) {suffix}";
 
-            return $"{(int)(timeSpan.TotalDays / 365)} year(s)";
+            return $"{(int)(timeSpan.TotalDays / 365)} year(s) {suffix}";
         }
 
         public static string TruncateHtml(string htmlContent, int maxLength = 150)

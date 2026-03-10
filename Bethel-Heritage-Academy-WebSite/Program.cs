@@ -15,17 +15,18 @@ builder.Services.AddRazorPages();
 builder.Services.AddControllers();
 
 // CORS
+
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(policy =>
-    {
-        policy.WithOrigins(
-                "https://admin.bethelheritageacademy.com",
-                "https://localhost:7101"
-            )
-            .AllowAnyHeader()
-            .AllowAnyMethod();
-    });
+    options.AddPolicy("AllowAdmin",
+        policy =>
+        {
+            policy.WithOrigins("https://admin.bethelheritageacademy.com.ng",
+                "https://localhost:7101", "https://localhost:44379"
+                )
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
 });
 
 // Database
@@ -49,7 +50,7 @@ var app = builder.Build();
 // ==========================
 
 // CORS (must come before routing endpoints)
-app.UseCors();
+app.UseCors("AllowAdmin");
 
 if (!app.Environment.IsDevelopment())
 {
